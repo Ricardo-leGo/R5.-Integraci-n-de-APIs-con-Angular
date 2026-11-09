@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie';
 import { Movie } from '../../models/movie';
@@ -7,7 +7,7 @@ import { Movie } from '../../models/movie';
   selector: 'app-movie-list',
   standalone: true,
   imports: [CommonModule],
-    templateUrl: './movie-list.html',
+  templateUrl: './movie-list.html',
   styleUrls: ['./movie-list.css']
 })
 export class MovieListComponent implements OnInit {
@@ -17,7 +17,10 @@ export class MovieListComponent implements OnInit {
 
   @Output() selectMovie = new EventEmitter<number>();
 
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadMovies();
@@ -29,10 +32,12 @@ export class MovieListComponent implements OnInit {
       next: (response) => {
         this.movies = response.results;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        this.errorMessage = 'Error al cargar las películas en Cinema UVEG. Revisa tu Token de API.';
+        this.errorMessage = 'Error al cargar las películas en Cinema UVEG.';
         this.loading = false;
+        this.cdr.detectChanges();
         console.error(err);
       }
     });

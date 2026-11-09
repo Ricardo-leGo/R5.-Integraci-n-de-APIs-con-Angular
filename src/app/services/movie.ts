@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie, MovieResponse } from '../models/movie';
-
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private readonly baseUrl = '';
-  private readonly apiToken = '';
+private readonly baseUrl = 'https://api.themoviedb.org/3';
+private readonly apiToken = '';
+
 
   private get headers(): HttpHeaders {
     return new HttpHeaders({
@@ -24,7 +25,6 @@ export class MovieService {
       headers: this.headers
     });
   }
-
 
   getMovieDetails(movieId: number): Observable<Movie> {
     return this.http.get<Movie>(`${this.baseUrl}/movie/${movieId}`, {

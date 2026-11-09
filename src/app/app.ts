@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieListComponent } from './components/movie-list/movie-list';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail';
@@ -16,14 +16,23 @@ export class AppComponent {
   selectedMovie: Movie | null = null;
   loadingDetail: boolean = false;
 
-  constructor(private movieService: MovieService) {}
+
+  constructor(
+    private movieService: MovieService,
+    private cdr: ChangeDetectorRef
+) {}
+
+
 
   onMovieSelected(movieId: number): void {
     this.loadingDetail = true;
+    this.cdr.detectChanges();
     this.movieService.getMovieDetails(movieId).subscribe({
       next: (movie) => {
         this.selectedMovie = movie;
         this.loadingDetail = false;
+        this.cdr.detectChanges();
+
       },
       error: (err) => {
         console.error('Error al obtener el detalle en Cinema UVEG:', err);

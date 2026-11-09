@@ -1,23 +1,28 @@
 <div class="list-container">
   <h2>Películas Mejor Valoradas</h2>
 
-  <div *ngIf="loading" class="spinner">Cargando cartelera de Cinema UVEG...</div>
-  <div *ngIf="errorMessage" class="error-box">{{ errorMessage }}</div>
+  @if (loading) {
+    <div class="spinner">Cargando cartelera de Cinema UVEG...</div>
+  }
 
-  <div *ngIf="!loading && !errorMessage" class="movies-grid">
-    <div 
-      *ngFor="let movie of movies" 
-      class="movie-card" 
-      (click)="onSelectMovie(movie.id)"
-    >
-      <img 
-        [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w300' + movie.poster_path : 'https://via.placeholder.com/300x450?text=Sin+Imagen'" 
-        [alt]="movie.title" 
-      />
-      <div class="movie-card-info">
-        <h3>{{ movie.title }}</h3>
-        <p class="rating">⭐ {{ movie.vote_average | number:'1.1-1' }}</p>
-      </div>
+  @if (errorMessage) {
+    <div class="error-box">{{ errorMessage }}</div>
+  }
+
+  @if (!loading && !errorMessage) {
+    <div class="movies-grid">
+      @for (movie of movies; track movie.id) {
+        <div class="movie-card" (click)="onSelectMovie(movie.id)">
+          <img 
+            [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w300' + movie.poster_path : 'https://via.placeholder.com/300x450?text=Sin+Imagen'" 
+            [alt]="movie.title" 
+          />
+          <div class="movie-card-info">
+            <h3>{{ movie.title }}</h3>
+            <p class="rating">⭐ {{ movie.vote_average | number:'1.1-1' }}</p>
+          </div>
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>
