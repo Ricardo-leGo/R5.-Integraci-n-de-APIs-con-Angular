@@ -1,0 +1,66 @@
+.btn-back {
+  background-color: #0d1b2a;
+  color: #00e676;
+  border: 1px solid #00e676;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: #1b263b;
+}
+
+.detail-card {
+  display: flex;
+  gap: 2rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.poster-wrapper img {
+  width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-info h2 {
+  margin-top: 0;
+  font-size: 2.2rem;
+  color: #0d1b2a;
+}
+
+.release-date {
+  color: #4a5568;
+}
+
+.rating {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+  color: #2b2d42;
+}
+
+.overview {
+  line-height: 1.7;
+  color: #2d3748;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .detail-card {
+    flex-direction: column;
+  }
+  .poster-wrapper img {
+    width: 100%;
+  }
+}
