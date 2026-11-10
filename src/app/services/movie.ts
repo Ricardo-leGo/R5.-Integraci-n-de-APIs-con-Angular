@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class MovieService {
 private readonly baseUrl = 'https://api.themoviedb.org/3';
-private readonly apiToken = '';
+private readonly apiToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTVjOGZiYThiZjQwODJkMmZlOTdkMTc3OTUzZjRjMyIsIm5iZiI6MTc5NDE5MDU5My4wNTMsInN1YiI6IjZhZjEyZDAxOTUzNzgxMTg4ZjMwZjdiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E-vxzFhih1ApUAC4z3oV-RMsFDK7O_SqFRkb4FxBuDk';
 
 
   private get headers(): HttpHeaders {
